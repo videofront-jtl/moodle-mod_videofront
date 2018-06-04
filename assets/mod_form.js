@@ -14,20 +14,24 @@ $(document).ready(function () {
 
     loadVideos(1, 0, true);
 
+    require(['core/url'], function (url) {
+        loadingbars = url.imageUrl('icones/loading-bars', 'videofront');
+        foldervideo = url.imageUrl('icones/folder-video', 'videofront');
+    });
 });
 
 var timeSearchVideo = 0;
+var loadingbars, foldervideo;
 
 function loadVideos(page, pasta, paginate_offset) {
     var paginate = $('#vidrofront-elementos');
-    paginate.html("<div style='text-align:center'><img height='80' src='/mod/videofront/assets/loading-bars.svg' ></div>");
+    paginate.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
 
     if (!paginate_offset) {
         $('html, body').animate({
             scrollTop : paginate.offset().top - 100
         }, 800);
     }
-
     require(['core/ajax'], function (ajax) {
         ajax.call([{
             methodname : 'mod_videofront_video_list',
@@ -81,7 +85,7 @@ function processoListaCurso(videos) {
                     html =
                         '<div class="lista-itens-grid">' +
                         '    <span class="itens"  onclick="loadVideos(1, ' + pastaId + ', false)">' +
-                        '        <img src="/mod/videofront/assets/folder-video.svg" height="133" width="236"><br>' +
+                        '        <img src="' + foldervideo + '" height="133" width="236"><br>' +
                         '        <span class="titulo">' + video.VIDEO_TITULO + '</span>' +
                         '    </span>' +
                         '</div>';
