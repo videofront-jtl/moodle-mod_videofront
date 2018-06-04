@@ -38,46 +38,18 @@ class video {
     }
 
     public static function getplayer($cmid, $identifier, $safetyplayer) {
-        global $CFG, $USER;
-
-        $querydata = array(
-            'cmid' => $cmid,
-            'identifier' => $identifier,
-            'matriculaid' => $USER->id,
-            'nome' => fullname($USER),
-            "safetyplayer" => $safetyplayer,
-            'email' => $USER->email,
-        );
+        global $USER;
 
         $post = array(
             "identifier" => $identifier,
             "safetyplayer" => $safetyplayer,
-            "baseurl" => "{$CFG->wwwroot}/mod/videofront/video_api.php?" . http_build_query($querydata)
+            'cmid' => $cmid,
+            'matriculaid' => $USER->id,
+            'nome' => fullname($USER),
+            'email' => $USER->email
         );
 
         $baseurl = "api/videos/getplayer/";
-        return self::load($baseurl, $post);
-    }
-
-    public static function getvideo_hls() {
-        global $CFG;
-
-        $querydata = array(
-            'cmid' => optional_param('cmid', 0, PARAM_TEXT),
-            'identifier' => optional_param('identifier', 0, PARAM_TEXT),
-            'matriculaid' => optional_param('matriculaid', 0, PARAM_TEXT),
-            'nome' => optional_param('nome', 0, PARAM_TEXT),
-            'email' => optional_param('email', 0, PARAM_TEXT)
-        );
-
-        $post = array(
-            "identifier" => optional_param('identifier', 0, PARAM_TEXT),
-            "safetyplayer" => optional_param('safetyplayer', 0, PARAM_TEXT),
-            "filename" => optional_param('filename', 0, PARAM_TEXT),
-            "baseurl" => "{$CFG->wwwroot}/mod/videofront/video_api.php?" . http_build_query($querydata)
-        );
-
-        $baseurl = "api/videos/getvideo_hls/";
         return self::load($baseurl, $post);
     }
 
