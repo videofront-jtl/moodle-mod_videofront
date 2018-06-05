@@ -11,4 +11,4 @@ A Videoteca possui suporte nativo a Dynamic Stream. Isso permite que seus vídeo
 ## E a segurança?
 O acesso aos vídeos é por Token HMAC que traz uma segurança elevada. Através dele é gerado um HASH HMAC que é praticamente impossível decifrar.
 
-Gostou e quer testar? [Entre em contatio](https://www.videofront.com.br/br/Contato)
+Gostou e quer testar? [Entre em contato](https://www.videofront.com.br/br/Contato)
