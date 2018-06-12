@@ -22,9 +22,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'VideoFront Video';
-$string['modulenameplural'] = 'VideoFront Video';
-$string['modulename_help'] = 'VideoFront is a plugin that simplifies and adds a lot of security in Moodle transactions with the Video Library';
+$string['modulename'] = 'VideoFront Vídeo';
+$string['modulenameplural'] = 'VideoFront Vídeo';
+$string['modulename_help'] = 'VídeoFront é um plugin que simplifica e adiciona muita segurança nas transações do Moodle com a Videoteca';
 $string['videofront:addinstance'] = 'Add a new VideoFront';
 $string['videofront:submit'] = 'Submit VideoFront';
 $string['videofront:view'] = 'View VideoFront';
@@ -32,15 +32,15 @@ $string['videofront'] = 'VideoFront';
 $string['pluginadministration'] = 'VideoFront administration';
 $string['pluginname'] = 'VideoFront';
 
-$string['name_title'] = 'Title';
-$string['identifier'] = 'Video identifier';
-$string['identifier_help'] = 'Identifier of the video only in the Video Library!';
+$string['name_title'] = 'Título';
+$string['identifier'] = 'Identificador do vídeo';
+$string['identifier_help'] = 'Identificador do único do vídeo na Videoteca!';
 
-$string['url_title'] = 'Video Library Url';
-$string['url_desc'] = 'Add Video URL for Video Sync!';
+$string['url_title'] = 'Url da Videoteca';
+$string['url_desc'] = 'Adicione a URL da Videoteca para a sincronização dos Vídeos!';
 
-$string['token_title'] = 'Video Library Token';
-$string['token_desc'] = 'Token for API to communicate with Video Library!';
+$string['token_title'] = 'Token da Videoteca';
+$string['token_desc'] = 'Token para API poder se comunicar com a Videoteca!';
 
-$string['security_title'] = 'Security';
-$string['security_desc'] = 'About the Player show?';
+$string['safety_title'] = 'Segurança';
+$string['safety_desc'] = 'Sobre o Player mostrar?';
