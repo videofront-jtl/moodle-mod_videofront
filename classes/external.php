@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Class for ajax call
+ *
  * @package    mod_videofront
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -22,9 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class for ajax call
+ */
 class mod_videofront_external extends external_api {
 
     /**
+     * Listing parameters.
+     *
      * @return external_function_parameters
      */
     public static function listing_parameters() {
@@ -36,6 +43,16 @@ class mod_videofront_external extends external_api {
             ));
     }
 
+
+    /**
+     * Listing.
+     *
+     * @param $page
+     * @param $pasta
+     * @param $titulo
+     * @return mixed
+     * @throws invalid_parameter_exception
+     */
     public static function listing($page, $pasta, $titulo) {
 
         $params = self::validate_parameters(self::listing_parameters(), [
@@ -48,6 +65,11 @@ class mod_videofront_external extends external_api {
         return video::listing($params['page'], $params['pasta'], $params['titulo']);
     }
 
+    /**
+     * Listing returns.
+     *
+     * @return external_single_structure
+     */
     public static function listing_returns() {
         return new external_single_structure(
             array(

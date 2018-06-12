@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Restore videofront activity structure step.
+ *
  * @package   mod_videofront
  * @category  backup
  * @copyright 2018 Eduardo Kraus  {@link http://videofront.com.br}
@@ -24,6 +26,8 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
+ * Restore videofront activity structure step.
+ *
  * @package   mod_videofront
  * @category  backup
  * @copyright 2018 Eduardo Kraus  {@link http://videofront.com.br}

@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Course module instance list viewed.
+ *
  * @package    mod_videofront
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,5 +27,8 @@ namespace mod_videofront\event;
 defined('MOODLE_INTERNAL') || die();
 
 
+/**
+ * Course module instance list viewed.
+ */
 class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
 }

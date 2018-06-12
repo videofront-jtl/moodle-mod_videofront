@@ -1,20 +1,20 @@
-$(document).ready(function () {
+jQuery(document).ready(function() {
     "use strict";
 
-    $('#fitem_id_showdescription').after('<div id="vidrofront-load"></div>');
-    $('#vidrofront-load')
-        .append('<ul id="vidrofront-breadcrumb" ><li onclick="loadVideos(1,0, false)">Pasta Raiz</li></ul>')
+    jQuery('#fitem_id_showdescription').after('<div id="vidrofront-load"></div>');
+    jQuery('#vidrofront-load')
+        .append('<ul id="vidrofront-breadcrumb" ><li onclick="load_videos(1,0, false)">Pasta Raiz</li></ul>')
         .append('<div id="vidrofront-search" ><input type="text" id="vidrofront-titulo-search" placeholder="Buscar vídeos"></div>')
         .append('<div id="vidrofront-elementos"></div>')
         .append('<div id="vidrofront-pagination"></div>');
 
-    $('#vidrofront-titulo-search')
-        .val($("#id_identifier").val())
-        .keyup(findVideo);
+    jQuery('#vidrofront-titulo-search')
+        .val(jQuery("#id_identifier").val())
+        .keyup(find_video);
 
-    loadVideos(1, 0, true);
+    load_videos(1, 0, true);
 
-    require(['core/url'], function (url) {
+    require(['core/url'], function(url) {
         loadingbars = url.imageUrl('icones/loading-bars', 'videofront');
         foldervideo = url.imageUrl('icones/folder-video', 'videofront');
     });
@@ -23,47 +23,39 @@ $(document).ready(function () {
 var timeSearchVideo = 0;
 var loadingbars, foldervideo;
 
-function loadVideos(page, pasta, paginate_offset) {
-    var paginate = $('#vidrofront-elementos');
+function load_videos(page, pasta, paginate_offset) {
+    var paginate = jQuery('#vidrofront-elementos');
     paginate.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
 
     if (!paginate_offset) {
-        $('html, body').animate({
+        jQuery('html, body').animate({
             scrollTop : paginate.offset().top - 100
         }, 800);
     }
-    require(['core/ajax'], function (ajax) {
+    require(['core/ajax'], function(ajax) {
         ajax.call([{
-            methodname : 'mod_videofront_video_list',
-            args       : {
-                page   : page,
-                pasta  : pasta,
-                titulo : $('#vidrofront-titulo-search').val()
-            },
-            done       : processoListaCurso,
-            fail       : processoListaCursoError
+            methodname : 'mod_videofront_video_list', args : {
+                page : page, pasta : pasta, titulo : jQuery('#vidrofront-titulo-search').val()
+            }, done : process_list_course, fail : process_list_course_error
         }]);
     });
 }
 
-function processoListaCurso(videos) {
+function process_list_course(videos) {
 
-    var paginate = $('#vidrofront-elementos');
+    var paginate = jQuery('#vidrofront-elementos');
 
     if (videos.status == "success") {
         if (videos.pasta.PASTA_ID == 0) {
-            htmlNav =
-                '<li onclick="loadVideos(1, 0, false)">Pasta Raiz</li>';
+            htmlNav = '<li onclick="load_videos(1, 0, false)">Pasta Raiz</li>';
         } else {
-            htmlNav =
-                '<li onclick="loadVideos(1, 0, false)">Pasta Raiz</li>' +
-                '<li onclick="loadVideos(1, ' + videos.pasta.PASTA_ID + ', false)">' + videos.pasta.PASTA_TITULO + '</li>';
+            htmlNav = '<li onclick="load_videos(1, 0, false)">Pasta Raiz</li>' + '<li onclick="load_videos(1, ' + videos.pasta.PASTA_ID + ', false)">' + videos.pasta.PASTA_TITULO + '</li>';
         }
-        $('#vidrofront-breadcrumb').html(htmlNav);
+        jQuery('#vidrofront-breadcrumb').html(htmlNav);
 
         if (videos.videos.length) {
             paginate.html("");
-            var iterate = $.each(videos.videos, function (key, video) {
+            var iterate = jQuery.each(videos.videos, function(key, video) {
 
                 var linkThumb = videos.thumburl.replace(videos.thumbreplace, video.VIDEO_IDENTIFIER);
                 var titulo = video.VIDEO_TITULO;
@@ -73,58 +65,57 @@ function processoListaCurso(videos) {
 
                 var html = "";
                 if (video.VIDEO_TIPO == "video") {
-                    html =
-                        '<div class="lista-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '">' +
-                        '    <span class="itens" onclick="selectVideo(\'' + video.VIDEO_IDENTIFIER + '\', \'' + video.VIDEO_TITULO + '\')">' +
-                        '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
-                        '        <span class="titulo">' + titulo + '</span>' +
-                        '    </span>' +
-                        '</div>';
+                    html = '<div class="lista-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '">' + '    <span class="itens" onclick="select_video(\'' + video.VIDEO_IDENTIFIER + '\', \'' + video.VIDEO_TITULO + '\')">' + '        <img src="' + linkThumb + '" height="133" width="236"><br>' + '        <span class="titulo">' + titulo + '</span>' + '    </span>' + '</div>';
                 } else {
                     var pastaId = video.ITEM_ID.replace("p", "");
-                    html =
-                        '<div class="lista-itens-grid">' +
-                        '    <span class="itens"  onclick="loadVideos(1, ' + pastaId + ', false)">' +
-                        '        <img src="' + foldervideo + '" height="133" width="236"><br>' +
-                        '        <span class="titulo">' + video.VIDEO_TITULO + '</span>' +
-                        '    </span>' +
-                        '</div>';
+                    html = '<div class="lista-itens-grid">' + '    <span class="itens"  onclick="load_videos(1, ' + pastaId + ', false)">' + '        <img src="' + foldervideo + '" height="133" width="236"><br>' + '        <span class="titulo">' + video.VIDEO_TITULO + '</span>' + '    </span>' + '</div>';
                 }
                 paginate.append(html);
             });
 
-            $.when(iterate).done(function () {
-                createPaginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
+            jQuery.when(iterate).done(function() {
+                create_paginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
 
-                var identifier = $('#id_identifier').val();
+                var identifier = jQuery('#id_identifier').val();
                 if (identifier.length > 4) {
-                    $('#video_identifier_' + identifier).find('.itens').addClass("selected");
+                    jQuery('#video_identifier_' + identifier).find('.itens').addClass("selected");
                 }
             });
         } else {
             paginate.html('<div class="alert alert-info">Nenhum vídeo localizado</div>');
-            createPaginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
+            create_paginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
         }
     } else {
-        processoListaCursoError(videos.error);
+        process_list_course_error(videos.error);
     }
 }
 
-function processoListaCursoError(error) {
+function process_list_course_error(error) {
     paginate.html('<div class="alert alert-danger">' + error + '</div>');
-    createPaginator(0, 0, 0, 0);
+    create_paginator(0, 0, 0, 0);
 }
 
-function findVideo() {
+/**
+ * Find video.
+ */
+function find_video() {
     clearInterval(timeSearchVideo);
-    timeSearchVideo = setTimeout(function () {
-        loadVideos(1, 0, true);
+    timeSearchVideo = setTimeout(function() {
+        load_videos(1, 0, true);
     }, 500);
 }
 
-function createPaginator(page, numvideos, perpage, pasta) {
+/**
+ * Create video paginator.
+ *
+ * @param page
+ * @param numvideos
+ * @param perpage
+ * @param pasta
+ */
+function create_paginator(page, numvideos, perpage, pasta) {
     var countpages = Math.floor(numvideos / perpage);
-    var pagination = $('#vidrofront-pagination');
+    var pagination = jQuery('#vidrofront-pagination');
 
     if ((numvideos % perpage) != 0) {
         countpages += 1;
@@ -134,9 +125,9 @@ function createPaginator(page, numvideos, perpage, pasta) {
     pagination.append('<ul class="pagination"></ul>');
 
     if (page != 1) {
-        pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(1, ' + pasta + ', false)"><span>«</span></li>');
+        pagination.find('.pagination').append('<li class="clicked" onclick="load_videos(1, ' + pasta + ', false)"><span>«</span></li>');
     }
-    i = page - 4;
+    var i = page - 4;
     if (i < 1) {
         i = 1;
     }
@@ -145,12 +136,12 @@ function createPaginator(page, numvideos, perpage, pasta) {
         pagination.find('.pagination').append('<li><span>...</span></li>');
     }
 
-    loop = 0;
+    var loop = 0;
     for (; i <= countpages; i++) {
         if (i == page) {
             pagination.find('.pagination').append('<li class="active"><span>' + i + '</span></li>');
         } else {
-            pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(' + i + ', ' + pasta + ', false)"><span>' + i + '</span></li>');
+            pagination.find('.pagination').append('<li class="clicked" onclick="load_videos(' + i + ', ' + pasta + ', false)"><span>' + i + '</span></li>');
         }
 
         loop++;
@@ -162,16 +153,22 @@ function createPaginator(page, numvideos, perpage, pasta) {
         }
     }
     if (page != countpages && countpages > 1) {
-        pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(' + countpages + ', ' + pasta + ', false)"><span>»</span></li>');
+        pagination.find('.pagination').append('<li class="clicked" onclick="load_videos(' + countpages + ', ' + pasta + ', false)"><span>»</span></li>');
     }
 }
 
-function selectVideo(identifier, titulo) {
-    $("#id_identifier").val(identifier);
+/**
+ * Funcion mark current video.
+ *
+ * @param identifier
+ * @param titulo
+ */
+function select_video(identifier, titulo) {
+    jQuery("#id_identifier").val(identifier);
     if (titulo.length) {
-        $("#id_name").val(titulo);
+        jQuery("#id_name").val(titulo);
     }
 
-    $('.lista-itens-grid').find('.itens').removeClass("selected");
-    $('#video_identifier_' + identifier).find('.itens').addClass("selected");
+    jQuery('.lista-itens-grid').find('.itens').removeClass("selected");
+    jQuery('#video_identifier_' + identifier).find('.itens').addClass("selected");
 }

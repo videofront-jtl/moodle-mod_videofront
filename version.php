@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Videofront version.
+ *
  * @package    mod_videofront
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_videofront';
-$plugin->version = 2018061200;
-$plugin->release = 'v2.3.1';
+$plugin->version = 2018061201;
+$plugin->release = 'v2.3.2';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_STABLE;

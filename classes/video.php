@@ -22,8 +22,20 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class video
+ */
 class video {
 
+    /**
+     * Call for list videos in videoteca.
+     *
+     * @param $page
+     * @param $pasta
+     * @param $titulo
+     * @return array
+     * @throws dml_exception
+     */
     public static function listing($page, $pasta, $titulo) {
         $post = array(
             "page" => $page,
@@ -37,6 +49,15 @@ class video {
         return json_decode($json);
     }
 
+    /**
+     * Call for get player code.
+     *
+     * @param $cmid
+     * @param $identifier
+     * @param $safetyplayer
+     * @return string
+     * @throws dml_exception
+     */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
         global $USER;
 
@@ -54,6 +75,14 @@ class video {
         return self::load($baseurl, $post);
     }
 
+    /**
+     * Curl execution.
+     *
+     * @param $baseurl
+     * @param null $post
+     * @return string
+     * @throws dml_exception
+     */
     private static function load($baseurl, $post = null) {
 
         $config = get_config('videofront');

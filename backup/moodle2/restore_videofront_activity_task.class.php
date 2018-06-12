@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Restore videofront activity task.
+ *
  * @package   mod_videofront
  * @category  backup
  * @copyright 2018 Eduardo Kraus  {@link http://videofront.com.br}
@@ -26,6 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/mod/videofront/backup/moodle2/restore_videofront_stepslib.php');
 
 /**
+ * Restore videofront activity task.
+ *
  * @package   mod_videofront
  * @category  backup
  * @copyright 2018 Eduardo Kraus  {@link http://videofront.com.br}
