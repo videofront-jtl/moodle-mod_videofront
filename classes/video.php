@@ -43,6 +43,7 @@ class video {
         $post = array(
             "identifier" => $identifier,
             "safetyplayer" => $safetyplayer,
+            "user_agent" => $_SERVER['HTTP_USER_AGENT'],
             'cmid' => $cmid,
             'matriculaid' => $USER->id,
             'nome' => fullname($USER),
