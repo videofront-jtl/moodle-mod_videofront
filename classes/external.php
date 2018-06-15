@@ -53,8 +53,6 @@ class mod_videofront_external extends external_api {
      * @param $pasta
      * @param $titulo
      * @return array
-     * @throws dml_exception
-     * @throws invalid_parameter_exception
      */
     public static function listing($page, $pasta, $titulo) {
 

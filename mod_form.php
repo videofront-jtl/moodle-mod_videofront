@@ -71,7 +71,7 @@ class mod_videofront_mod_form extends moodleform_mod {
         }
 
         $html = '<div id="vidrofront-load">' .
-            '    <ul id="vidrofront-breadcrumb" ><li onclick="load_videos(1,0, false)">Pasta Raiz</li></ul>' .
+            '    <ul id="vidrofront-breadcrumb" ><li onclick="loadVideos(1,0, false)">Pasta Raiz</li></ul>' .
             '    <div id="vidrofront-search" >' .
             '         <input type="text" id="vidrofront-title-search" placeholder="Buscar vídeos">' .
             '    </div>' .

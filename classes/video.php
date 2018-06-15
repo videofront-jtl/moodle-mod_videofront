@@ -38,6 +38,7 @@ class video {
      * @param $page
      * @param $pasta
      * @param $titulo
+     *
      * @return array
      */
     public static function listing($page, $pasta, $titulo) {
@@ -59,6 +60,7 @@ class video {
      * @param $cmid
      * @param $identifier
      * @param $safetyplayer
+     *
      * @return string
      */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
@@ -83,9 +85,10 @@ class video {
      *
      * @param $baseurl
      * @param null $post
+     *
      * @return string
      */
-    private static function load($baseurl, $post = null) {
+    private static function load($baseurl, $post) {
 
         $config = get_config('videofront');
 
