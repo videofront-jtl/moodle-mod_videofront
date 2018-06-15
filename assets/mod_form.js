@@ -4,9 +4,10 @@ require(['jquery'], function($) {
     var loadingbars, foldervideo;
     var timeSearchVideo = 0;
     var elements = $('#vidrofront-elements');
+    var inputIdentifier = $("#id_identifier");
 
     $('#vidrofront-title-search')
-        .val($("#id_identifier").val())
+        .val(inputIdentifier.val())
         .keyup(findVideo);
 
     require(['core/url'], function(url) {
@@ -15,6 +16,7 @@ require(['jquery'], function($) {
     });
 
     loadVideos(1, 0, true);
+    selectVideo(inputIdentifier.val(), $("#id_name").val());
 
     /**
      * Load videos.
@@ -75,8 +77,7 @@ require(['jquery'], function($) {
                     if (video.VIDEO_TIPO == "video") {
                         var videoIdentifier = video.VIDEO_IDENTIFIER.toUpperCase();
                         var html1 = '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
-                            '             data-identifier="' + videoIdentifier + '" ' +
-                            '             data-title="' + video.VIDEO_TITULO + '">' +
+                            '             onclick="selectVideo(\'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')"'>' +
                             '    <span class="itens" >' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
                             '        <span class="title">' + title + '</span>' +
@@ -98,16 +99,10 @@ require(['jquery'], function($) {
                 $.when(iterate).done(function() {
                     createPaginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
 
-                    var identifier = $('#id_identifier').val().toUpperCase();
+                    var identifier = inputIdentifier.val().toUpperCase();
                     if (identifier.length > 2) {
                         $('#video_identifier_' + identifier).find('.itens').addClass("selected");
                     }
-
-                    $('.list-itens-grid').click(function() {
-                        var identifier2 = $(this).attr('data-identifier').toUpperCase();
-                        var title2 = $(this).attr('data-title');
-                        selectVideo(identifier2, title2);
-                    });
 
                 });
             } else {
@@ -203,7 +198,7 @@ require(['jquery'], function($) {
      * @param {string} title      video title
      */
     function selectVideo(identifier, title) {
-        $("#id_identifier").val(identifier);
+        inputIdentifier.val(identifier);
         if (title.length) {
             $("#id_name").val(title);
         }
