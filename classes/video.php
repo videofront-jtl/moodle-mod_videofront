@@ -35,9 +35,9 @@ class video {
     /**
      * Call for list videos in videoteca.
      *
-     * @param $page
-     * @param $pasta
-     * @param $titulo
+     * @param int $page
+     * @param int $pasta
+     * @param string $titulo
      *
      * @return array
      */
@@ -57,9 +57,9 @@ class video {
     /**
      * Call for get player code.
      *
-     * @param $cmid
-     * @param $identifier
-     * @param $safetyplayer
+     * @param int $cmid
+     * @param string $identifier
+     * @param string $safetyplayer
      *
      * @return string
      */
@@ -83,8 +83,8 @@ class video {
     /**
      * Curl execution.
      *
-     * @param $baseurl
-     * @param null $post
+     * @param string $baseurl
+     * @param array $post
      *
      * @return string
      */

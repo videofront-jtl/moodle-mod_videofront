@@ -9,12 +9,12 @@ require(['jquery'], function($) {
         .val($("#id_identifier").val())
         .keyup(findVideo);
 
-    loadVideos(1, 0, true);
-
     require(['core/url'], function(url) {
         loadingbars = url.imageUrl('icones/loading-bars', 'videofront');
         foldervideo = url.imageUrl('icones/folder-video', 'videofront');
     });
+
+    loadVideos(1, 0, true);
 
     /**
      * Load videos.
@@ -25,23 +25,22 @@ require(['jquery'], function($) {
      */
     function loadVideos(page, folder, paginateoffset) {
 
-        elements.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
-
         if (!paginateoffset) {
+            elements.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
             $('html, body').animate({
-                scrollTop : elements.offset().top - 100
+                scrollTop: elements.offset().top - 100
             }, 800);
         }
         require(['core/ajax'], function(ajax) {
             ajax.call([{
-                methodname : 'mod_videofront_video_list',
-                args : {
-                    page : page,
-                    pasta : folder,
-                    titulo : $('#vidrofront-title-search').val()
+                methodname: 'mod_videofront_video_list',
+                args: {
+                    page: page,
+                    pasta: folder,
+                    titulo: $('#vidrofront-title-search').val()
                 },
-                done : processListCourse,
-                fail : processListCourseError
+                done: processListCourse,
+                fail: processListCourseError
             }]);
         });
     }
@@ -73,25 +72,27 @@ require(['jquery'], function($) {
                         title = video.VIDEO_FILENAME;
                     }
 
-                    var html = "";
                     if (video.VIDEO_TIPO == "video") {
-                        html = '<div class="list-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '">' +
-                            '    <span class="itens" ' +
-                            '          onclick="selectVideo(\'' + video.VIDEO_IDENTIFIER + '\', \'' + video.VIDEO_TITULO + '\')">' +
+                        var html1 = '<div class="list-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '" ' +
+                            '             data-identifier="' + video.VIDEO_IDENTIFIER + '" ' +
+                            '             data-title="' + video.VIDEO_TITULO + '">' +
+                            '    <span class="itens" >' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
                             '        <span class="title">' + title + '</span>' +
                             '    </span>' +
                             '</div>';
+                        elements.append(html1);
+                        $('#video_identifier_' + video.VIDEO_IDENTIFIER).click(selectVideo);
                     } else {
                         var folderId = video.ITEM_ID.replace("p", "");
-                        html = '<div class="list-itens-grid">' +
+                        var html2 = '<div class="list-itens-grid">' +
                             '    <span class="itens"  onclick="loadVideos(1, ' + folderId + ', false)">' +
                             '        <img src="' + foldervideo + '" height="133" width="236"><br>' +
                             '        <span class="title">' + video.VIDEO_TITULO + '</span>' +
                             '    </span>' +
                             '</div>';
+                        elements.append(html2);
                     }
-                    elements.append(html);
                 });
 
                 $.when(iterate).done(function() {
@@ -194,7 +195,10 @@ require(['jquery'], function($) {
      * @param {string} identifier video identifier
      * @param {string} title      video title
      */
-    function selectVideo(identifier, title) {
+    function selectVideo() {
+        var identifier = $(this).attr('data-identifier');
+        var title = $(this).attr('data-title');
+
         $("#id_identifier").val(identifier);
         if (title.length) {
             $("#id_name").val(title);

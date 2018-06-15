@@ -49,9 +49,9 @@ class mod_videofront_external extends external_api {
     /**
      * Listing videos.
      *
-     * @param $page
-     * @param $pasta
-     * @param $titulo
+     * @param int $page
+     * @param int $pasta
+     * @param string $titulo
      * @return array
      */
     public static function listing($page, $pasta, $titulo) {
