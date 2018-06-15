@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_videofront';
 $plugin->version = 2018061402;
-$plugin->release = 'v2.3.10';
+$plugin->release = 'v2.3.11';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_STABLE;
