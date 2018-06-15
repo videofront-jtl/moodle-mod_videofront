@@ -27,14 +27,22 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
 /**
+ * Mod Form.
+ *
  * @package    mod_videofront
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_videofront_mod_form extends moodleform_mod {
 
+    /**
+     * Definition.
+     *
+     * @throws HTML_QuickForm_Error
+     * @throws coding_exception
+     */
     public function definition() {
-        global $CFG, $PAGE;
+        global $PAGE;
 
         $mform = $this->_form;
         $PAGE->requires->jquery();

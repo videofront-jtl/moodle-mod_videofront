@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Video class.
+ *
  * @package    mod_videofront
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class video
+ * Class video.
+ *
+ * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class video {
 
@@ -34,7 +39,6 @@ class video {
      * @param $pasta
      * @param $titulo
      * @return array
-     * @throws dml_exception
      */
     public static function listing($page, $pasta, $titulo) {
         $post = array(
@@ -56,7 +60,6 @@ class video {
      * @param $identifier
      * @param $safetyplayer
      * @return string
-     * @throws dml_exception
      */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
         global $USER;
@@ -81,7 +84,6 @@ class video {
      * @param $baseurl
      * @param null $post
      * @return string
-     * @throws dml_exception
      */
     private static function load($baseurl, $post = null) {
 

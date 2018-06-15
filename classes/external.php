@@ -25,7 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class for ajax call
+ * Class for ajax call.
+ *
+ * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_videofront_external extends external_api {
 
@@ -43,14 +46,14 @@ class mod_videofront_external extends external_api {
             ));
     }
 
-
     /**
-     * Listing.
+     * Listing videos.
      *
      * @param $page
      * @param $pasta
      * @param $titulo
-     * @return mixed
+     * @return array
+     * @throws dml_exception
      * @throws invalid_parameter_exception
      */
     public static function listing($page, $pasta, $titulo) {
