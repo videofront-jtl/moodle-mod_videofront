@@ -73,8 +73,9 @@ require(['jquery'], function($) {
                     }
 
                     if (video.VIDEO_TIPO == "video") {
-                        var html1 = '<div class="list-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '" ' +
-                            '             data-identifier="' + video.VIDEO_IDENTIFIER + '" ' +
+                        var videoIdentifier = video.VIDEO_IDENTIFIER.toUpperCase();
+                        var html1 = '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
+                            '             data-identifier="' + videoIdentifier + '" ' +
                             '             data-title="' + video.VIDEO_TITULO + '">' +
                             '    <span class="itens" >' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
@@ -82,7 +83,6 @@ require(['jquery'], function($) {
                             '    </span>' +
                             '</div>';
                         elements.append(html1);
-                        $('#video_identifier_' + video.VIDEO_IDENTIFIER).click(selectVideo);
                     } else {
                         var folderId = video.ITEM_ID.replace("p", "");
                         var html2 = '<div class="list-itens-grid">' +
@@ -98,10 +98,17 @@ require(['jquery'], function($) {
                 $.when(iterate).done(function() {
                     createPaginator(videos.page, videos.numvideos, videos.perpage, videos.pasta.PASTA_ID);
 
-                    var identifier = $('#id_identifier').val();
-                    if (identifier.length > 4) {
+                    var identifier = $('#id_identifier').val().toUpperCase();
+                    if (identifier.length > 2) {
                         $('#video_identifier_' + identifier).find('.itens').addClass("selected");
                     }
+
+                    $('.list-itens-grid').click(function() {
+                        var identifier2 = $(this).attr('data-identifier').toUpperCase();
+                        var title2 = $(this).attr('data-title');
+                        selectVideo(identifier2, title2);
+                    });
+
                 });
             } else {
                 elements.html('<div class="alert alert-info">Nenhum vídeo localizado</div>');
@@ -195,10 +202,7 @@ require(['jquery'], function($) {
      * @param {string} identifier video identifier
      * @param {string} title      video title
      */
-    function selectVideo() {
-        var identifier = $(this).attr('data-identifier');
-        var title = $(this).attr('data-title');
-
+    function selectVideo(identifier, title) {
         $("#id_identifier").val(identifier);
         if (title.length) {
             $("#id_name").val(title);
