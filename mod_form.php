@@ -54,11 +54,26 @@ class mod_videofront_mod_form extends moodleform_mod {
         $mform->addRule('identifier', null, 'required', null, 'client');
         $mform->addRule('identifier', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
-        if ($CFG->branch >= 29) {
-            $this->standard_intro_elements();
+        $this->standard_intro_elements();
+
+        if (method_exists($PAGE->theme, "image_url")) {
+            $urlimagem = $PAGE->theme->image_url('icones/loading-bars', 'mod_videofront');
         } else {
-            $this->add_intro_editor();
+            $urlimagem = $PAGE->theme->pix_url('icones/loading-bars', 'videofront');
         }
+
+        $html = '<div id="vidrofront-load">' .
+            '    <ul id="vidrofront-breadcrumb" ><li onclick="load_videos(1,0, false)">Pasta Raiz</li></ul>' .
+            '    <div id="vidrofront-search" >' .
+            '         <input type="text" id="vidrofront-title-search" placeholder="Buscar vídeos">' .
+            '    </div>' .
+            '    <div id="vidrofront-elements">' .
+            '        <div style="text-align:center">' . get_string('loadind', 'videofront') . '</div>' .
+            '        <div style="text-align:center"><img height="80" src="' . $urlimagem . '" ></div>' .
+            '    </div>' .
+            '    <div id="vidrofront-pagination"></div>' .
+            '</div>';
+        $mform->addElement('html', $html, 'videofront', 'name');
 
         $this->standard_coursemodule_elements();
         $this->add_action_buttons();

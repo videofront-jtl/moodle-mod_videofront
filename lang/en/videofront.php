@@ -34,6 +34,8 @@ $string['videofront'] = 'VideoFront';
 $string['pluginadministration'] = 'VideoFront administration';
 $string['pluginname'] = 'VideoFront';
 
+$string['loadind'] = 'Loading video list...';
+
 $string['name_title'] = 'Title';
 $string['identifier'] = 'Video identifier';
 $string['identifier_help'] = 'Identifier of the video only in the VideoTeca!';
@@ -44,5 +46,5 @@ $string['url_desc'] = 'Add Video URL for Video Sync!';
 $string['token_title'] = 'VideoTeca Token';
 $string['token_desc'] = 'Token for API to communicate with VideoTeca!';
 
-$string['security_title'] = 'Security';
-$string['security_desc'] = 'About the Player show?';
+$string['safety_title'] = 'Security';
+$string['safety_desc'] = 'About the Player show?';

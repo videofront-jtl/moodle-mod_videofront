@@ -34,6 +34,8 @@ $string['videofront'] = 'VideoFront';
 $string['pluginadministration'] = 'VideoFront administration';
 $string['pluginname'] = 'VideoFront';
 
+$string['loadind'] = 'Carregando lista de vídeos...';
+
 $string['name_title'] = 'Título';
 $string['identifier'] = 'Identificador do vídeo';
 $string['identifier_help'] = 'Identificador do único do vídeo na Videoteca!';

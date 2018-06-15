@@ -28,8 +28,8 @@
             width: 90%;
         }
     }
-    #vidrofront-elementos {
-        .lista-itens-grid {
+    #vidrofront-elements {
+        .list-itens-grid {
             border: 0 none;
             //float   : left;
             display: inline-block;
@@ -48,7 +48,7 @@
                 img {
                     width: 225px;
                 }
-                .titulo {
+                .title {
                     display: block;
                     color: #4c4949;
                     overflow: hidden;
@@ -67,7 +67,7 @@
                 }
                 &.selected {
                     background-color: rgba(51, 122, 183, 0.83);
-                    .titulo {
+                    .title {
                         color: #fff;
                     }
                     &:hover {
