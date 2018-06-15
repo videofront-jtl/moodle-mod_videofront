@@ -89,7 +89,6 @@ class video {
      * @return string
      */
     private static function load($baseurl, $post) {
-
         $config = get_config('videofront');
 
         $ch = curl_init();

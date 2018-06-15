@@ -55,7 +55,6 @@ class mod_videofront_external extends external_api {
      * @return array
      */
     public static function listing($page, $pasta, $titulo) {
-
         $params = self::validate_parameters(self::listing_parameters(), [
             'page' => $page,
             'pasta' => $pasta,

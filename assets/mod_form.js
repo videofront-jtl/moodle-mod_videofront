@@ -29,14 +29,19 @@ require(['jquery'], function($) {
 
         if (!paginateoffset) {
             $('html, body').animate({
-                scrollTop:elements.offset().top - 100
+                scrollTop : elements.offset().top - 100
             }, 800);
         }
         require(['core/ajax'], function(ajax) {
             ajax.call([{
-                methodname:'mod_videofront_video_list', args:{
-                    page:page, pasta:folder, titulo:$('#vidrofront-title-search').val()
-                }, done   :processListCourse, fail:processListCourseError
+                methodname : 'mod_videofront_video_list',
+                args : {
+                    page : page,
+                    pasta : folder,
+                    titulo : $('#vidrofront-title-search').val()
+                },
+                done : processListCourse,
+                fail : processListCourseError
             }]);
         });
     }
@@ -71,7 +76,8 @@ require(['jquery'], function($) {
                     var html = "";
                     if (video.VIDEO_TIPO == "video") {
                         html = '<div class="list-itens-grid" id="video_identifier_' + video.VIDEO_IDENTIFIER + '">' +
-                            '    <span class="itens" onclick="selectVideo(\'' + video.VIDEO_IDENTIFIER + '\', \'' + video.VIDEO_TITULO + '\')">' +
+                            '    <span class="itens" ' +
+                            '          onclick="selectVideo(\'' + video.VIDEO_IDENTIFIER + '\', \'' + video.VIDEO_TITULO + '\')">' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
                             '        <span class="title">' + title + '</span>' +
                             '    </span>' +
@@ -145,7 +151,8 @@ require(['jquery'], function($) {
         pagination.append('<ul class="pagination"></ul>');
 
         if (page != 1) {
-            pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(1, ' + folder + ', false)"><span>«</span></li>');
+            var h1 = '<li class="clicked" onclick="loadVideos(1, ' + folder + ', false)"><span>«</span></li>';
+            pagination.find('.pagination').append(h1);
         }
         var i = page - 4;
         if (i < 1) {
@@ -153,15 +160,18 @@ require(['jquery'], function($) {
         }
 
         if (i != 1) {
-            pagination.find('.pagination').append('<li><span>...</span></li>');
+            var h2 = '<li><span>...</span></li>';
+            pagination.find('.pagination').append(h2);
         }
 
         var loop = 0;
         for (; i <= countpages; i++) {
             if (i == page) {
-                pagination.find('.pagination').append('<li class="active"><span>' + i + '</span></li>');
+                var h3 = '<li class="active"><span>' + i + '</span></li>';
+                pagination.find('.pagination').append(h3);
             } else {
-                pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(' + i + ', ' + folder + ', false)"><span>' + i + '</span></li>');
+                var h4 = '<li class="clicked" onclick="loadVideos(' + i + ', ' + folder + ', false)"><span>' + i + '</span></li>';
+                pagination.find('.pagination').append(h4);
             }
 
             loop++;
@@ -173,7 +183,8 @@ require(['jquery'], function($) {
             }
         }
         if (page != countpages && countpages > 1) {
-            pagination.find('.pagination').append('<li class="clicked" onclick="loadVideos(' + countpages + ', ' + folder + ', false)"><span>»</span></li>');
+            var h5 = '<li class="clicked" onclick="loadVideos(' + countpages + ', ' + folder + ', false)"><span>»</span></li>';
+            pagination.find('.pagination').append(h5);
         }
     }
 
