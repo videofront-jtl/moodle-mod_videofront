@@ -190,20 +190,20 @@ require(['jquery'], function($) {
             pagination.find('.pagination').append(h5);
         }
     }
-
-    /**
-     * Funcion mark current video.
-     *
-     * @param {string} identifier video identifier
-     * @param {string} title      video title
-     */
-    function selectVideo(identifier, title) {
-        inputIdentifier.val(identifier);
-        if (title.length) {
-            $("#id_name").val(title);
-        }
-
-        $('.list-itens-grid').find('.itens').removeClass("selected");
-        $('#video_identifier_' + identifier).find('.itens').addClass("selected");
-    }
 });
+
+/**
+ * Funcion mark current video.
+ *
+ * @param {string} identifier video identifier
+ * @param {string} title      video title
+ */
+function selectVideo(identifier, title) {
+    $("#id_identifier").val(identifier);
+    if (title.length) {
+        $("#id_name").val(title);
+    }
+
+    $('.list-itens-grid').find('.itens').removeClass("selected");
+    $('#video_identifier_' + identifier).find('.itens').addClass("selected");
+}
