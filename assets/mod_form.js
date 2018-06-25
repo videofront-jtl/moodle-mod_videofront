@@ -16,7 +16,7 @@ require(['jquery'], function($) {
     });
 
     loadVideos(1, 0, true);
-    selectVideo(inputIdentifier.val(), $("#id_name").val());
+    selectVideo($, inputIdentifier.val(), $("#id_name").val());
 
     /**
      * Load videos.
@@ -77,7 +77,7 @@ require(['jquery'], function($) {
                     if (video.VIDEO_TIPO == "video") {
                         var videoIdentifier = video.VIDEO_IDENTIFIER.toUpperCase();
                         var html1 = '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
-                            '             onclick="selectVideo(\'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
+                            '             onclick="selectVideo($, \'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
                             '    <span class="itens" >' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
                             '        <span class="title">' + title + '</span>' +
@@ -195,10 +195,11 @@ require(['jquery'], function($) {
 /**
  * Funcion mark current video.
  *
+ * @param {object} $          Jquery identifier
  * @param {string} identifier video identifier
  * @param {string} title      video title
  */
-function selectVideo(identifier, title) {
+function selectVideo($, identifier, title) {
     $("#id_identifier").val(identifier);
     if (title.length) {
         $("#id_name").val(title);
