@@ -24,13 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+define("VIDEOFRONTVIDEO", true);
+
 /**
- * Class video.
+ * Class videofrontvideo.
  *
  * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class video {
+class videofrontvideo {
 
     /**
      * Call for list videos in videoteca.

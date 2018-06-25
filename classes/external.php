@@ -61,8 +61,10 @@ class mod_videofront_external extends external_api {
             'titulo' => $titulo
         ]);
 
-        require(__DIR__ . '/video.php');
-        return video::listing($params['page'], $params['pasta'], $params['titulo']);
+        if (!defined('VIDEOFRONTVIDEO')) {
+            require_once(__DIR__ . '/videofrontvideo.php');
+        }
+        return videofrontvideo::listing($params['page'], $params['pasta'], $params['titulo']);
     }
 
     /**

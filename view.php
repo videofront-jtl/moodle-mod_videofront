@@ -73,8 +73,10 @@ if ($config->safety) {
     }
 }
 
-require(__DIR__ . '/classes/video.php');
-$player = video::getplayer($id, $videofront->identifier, $safetyplayer);
+if (!defined('VIDEOFRONTVIDEO')) {
+    require_once(__DIR__ . '/classes/videofrontvideo.php');
+}
+$player = videofrontvideo::getplayer($id, $videofront->identifier, $safetyplayer);
 
 echo $OUTPUT->box($player, 'generalbox player', 'videofrontintro');
 echo $OUTPUT->footer();
