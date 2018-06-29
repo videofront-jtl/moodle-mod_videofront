@@ -61,11 +61,9 @@ class backup_videofront_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of videofronts.
         $search = '/('.$base.'\/mod\/videofront\/index.php\?id\=)([0-9]+)/';
         $content = preg_replace($search, '$@VIDEOFRONTINDEX*$2@$', $content);
 
-        // Link to videofront view by moduleid.
         $search = '/('.$base.'\/mod\/videofront\/view.php\?id\=)([0-9]+)/';
         $content = preg_replace($search, '$@VIDEOFRONTVIEWBYID*$2@$', $content);
 

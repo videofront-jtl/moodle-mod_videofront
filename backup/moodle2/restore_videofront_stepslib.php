@@ -58,7 +58,6 @@ class restore_videofront_activity_structure_step extends restore_activity_struct
         global $DB;
 
         $data = (object)$data;
-        $oldid = $data->id;
         $data->course = $this->get_courseid();
 
         if (empty($data->timecreated)) {
@@ -70,11 +69,9 @@ class restore_videofront_activity_structure_step extends restore_activity_struct
         }
 
         if ($data->grade < 0) {
-            // Scale found, get mapping.
             $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }
 
-        // Create the videofront instance.
         $newitemid = $DB->insert_record('videofront', $data);
         $this->apply_activity_instance($newitemid);
     }
@@ -83,7 +80,6 @@ class restore_videofront_activity_structure_step extends restore_activity_struct
      * Post-execution actions
      */
     protected function after_execute() {
-        // Add videofront related files, no need to match by itemname (just internally handled context).
         $this->add_related_files('mod_videofront', 'intro', null);
     }
 }
