@@ -16,36 +16,7 @@ require(['jquery'], function($) {
     });
 
     loadVideos(1, 0, true);
-    selectVideo($, inputIdentifier.val(), $("#id_name").val());
-
-    /**
-     * Load videos.
-     *
-     * @param {number} page           actual page
-     * @param {number} folder         folder actual
-     * @param {number} paginateoffset roll on top list
-     */
-    function loadVideos(page, folder, paginateoffset) {
-
-        if (!paginateoffset) {
-            elements.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
-            $('html, body').animate({
-                scrollTop: elements.offset().top - 100
-            }, 800);
-        }
-        require(['core/ajax'], function(ajax) {
-            ajax.call([{
-                methodname: 'mod_videofront_video_list',
-                args: {
-                    page: page,
-                    pasta: folder,
-                    titulo: $('#vidrofront-title-search').val()
-                },
-                done: processListCourse,
-                fail: processListCourseError
-            }]);
-        });
-    }
+    selectVideo(inputIdentifier.val(), $("#id_name").val());
 
     /**
      * Process list course.
@@ -77,7 +48,7 @@ require(['jquery'], function($) {
                     if (video.VIDEO_TIPO == "video") {
                         var videoIdentifier = video.VIDEO_IDENTIFIER.toUpperCase();
                         var html1 = '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
-                            '             onclick="selectVideo($, \'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
+                            '             onclick="selectVideo(\'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
                             '    <span class="itens" >' +
                             '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
                             '        <span class="title">' + title + '</span>' +
@@ -193,18 +164,50 @@ require(['jquery'], function($) {
 });
 
 /**
+ * Load videos.
+ *
+ * @param {number} page           actual page
+ * @param {number} folder         folder actual
+ * @param {number} paginateoffset roll on top list
+ */
+function loadVideos(page, folder, paginateoffset) {
+
+    if (!paginateoffset) {
+        elements.html('<div style="text-align:center"><img height="80" src="' + loadingbars + '" ></div>');
+        require(['jquery'], function($) {
+            $('html, body').animate({
+                scrollTop: elements.offset().top - 100
+            }, 800);
+        });
+    }
+    require(['core/ajax', 'jquery'], function(ajax, $) {
+        ajax.call([{
+            methodname: 'mod_videofront_video_list',
+            args: {
+                page: page,
+                pasta: folder,
+                titulo: $('#vidrofront-title-search').val()
+            },
+            done: processListCourse,
+            fail: processListCourseError
+        }]);
+    });
+}
+
+/**
  * Funcion mark current video.
  *
- * @param {object} $          Jquery identifier
  * @param {string} identifier video identifier
  * @param {string} title      video title
  */
-function selectVideo($, identifier, title) {
-    $("#id_identifier").val(identifier);
-    if (title.length) {
-        $("#id_name").val(title);
-    }
+function selectVideo(identifier, title) {
+    require(['jquery'], function($) {
+        $("#id_identifier").val(identifier);
+        if (title.length) {
+            $("#id_name").val(title);
+        }
 
-    $('.list-itens-grid').find('.itens').removeClass("selected");
-    $('#video_identifier_' + identifier).find('.itens').addClass("selected");
+        $('.list-itens-grid').find('.itens').removeClass("selected");
+        $('#video_identifier_' + identifier).find('.itens').addClass("selected");
+    });
 }
