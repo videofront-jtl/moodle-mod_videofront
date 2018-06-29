@@ -43,7 +43,7 @@ class backup_videofront_activity_structure_step extends backup_activity_structur
     protected function define_structure() {
 
         $videofront = new backup_nested_element('videofront', array('id'),
-            array('id','course','name','identifier','intro','introformat'));
+            array('id', 'course', 'name', 'identifier', 'intro', 'introformat'));
         $videofront->set_source_table('videofront', array('id' => backup::VAR_ACTIVITYID));
         $videofront->annotate_files('mod_videofront', 'intro', null);
         return $this->prepare_activity_structure($videofront);
