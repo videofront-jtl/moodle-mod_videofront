@@ -33,6 +33,7 @@ $string['videofront:view'] = 'View VideoFront';
 $string['videofront'] = 'VideoFront';
 $string['pluginadministration'] = 'VideoFront administration';
 $string['pluginname'] = 'VideoFront';
+$string['privacy:metadata'] = 'A Vídeoteca se integrada com o <a href="https://www.videofront.com.br/br/LiveSparrow">Live Sparrow</a> guardará dados para detecção de pirataria.';
 
 $string['loadind'] = 'Carregando lista de vídeos...';
 
@@ -48,3 +49,6 @@ $string['token_desc'] = 'Token para API poder se comunicar com a Videoteca!';
 
 $string['safety_title'] = 'Segurança';
 $string['safety_desc'] = 'Sobre o Player mostrar?';
+
+$string['safety_none'] = 'Nada';
+$string['safety_id'] = 'ID do Aluno';

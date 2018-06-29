@@ -36,8 +36,8 @@ if ($ADMIN->fulltree) {
         get_string('token_desc', 'videofront'), ''));
 
     $itensseguranca = array(
-        'none' => 'Nada',
-        'id' => 'ID do Aluno',
+        'none' => get_string('safety_none', 'videofront'),
+        'id' => get_string('safety_id', 'videofront')
     );
 
     $infofields = $DB->get_records('user_info_field');
