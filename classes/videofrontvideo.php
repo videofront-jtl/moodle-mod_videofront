@@ -67,15 +67,68 @@ class videofrontvideo {
      */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
         global $USER;
+        $config = get_config('videofront');
 
-        $post = array(
+        $payload = array(
             "identifier" => $identifier,
-            "safetyplayer" => $safetyplayer,
-            "user_agent" => $_SERVER['HTTP_USER_AGENT'],
-            'cmid' => $cmid
+            "matricula" => $cmid,
+            "nome" => fullname($USER),
+            "email" => $USER->email,
+            "safetyplayer" => $safetyplayer
         );
 
-        $baseurl = "api/videos/getplayer/";
+        require_once __DIR__ . "/crypt/jwt.php";
+        $token = \mod_videofront\crypt\jwt::encode($config->token, $payload);
+
+        return "
+            <div id='videoteca-background'>
+                <iframe width='100%' height='100%' frameborder='0'  
+                        id='videoteca-video' allowfullscreen
+                        src='{$config->url}Embed/iframe/?token={$token}'></iframe>
+            </div>
+            <script>
+                window.onload = function() {
+                    var videoBoxWidth = 0;
+
+                    var videoBox = document.getElementById('videoteca-background');
+                    if (videoBox.offsetWidth) {
+                        videoBoxWidth = videoBox.offsetWidth;
+                    } else if (videoBox.clientWidth) {
+                        videoBoxWidth = videoBox.clientWidth;
+                    }
+
+                    var videohd1 = document.getElementById('videoteca-video');
+                    var videoBoxHeight2   = videoBoxWidth * 9 / 16;
+                    videohd1.style.width  = videoBoxWidth + 'px';
+                    videohd1.style.height = videoBoxHeight2 + 'px';
+                };
+            </script>";
+
+        //$post = array(
+        //    "identifier" => $identifier,
+        //    "safetyplayer" => $safetyplayer,
+        //    "user_agent" => $_SERVER['HTTP_USER_AGENT'],
+        //    'cmid' => $cmid
+        //);
+        //
+        //$baseurl = "api/videos/getplayer/";
+        //return self::load($baseurl, $post);
+    }
+
+    /**
+     * get Kapture link
+     *
+     * @return string
+     */
+    public static function getkapturelink() {
+        global $USER;
+
+        $post = [
+            'email' => $USER->email,
+            'nome' => fullname($USER)
+        ];
+
+        $baseurl = "api/kapture/getlink/";
         return self::load($baseurl, $post);
     }
 

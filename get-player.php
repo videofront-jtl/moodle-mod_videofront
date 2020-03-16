@@ -18,7 +18,7 @@
  * Videofront view.
  *
  * @package    mod_videofront
- * @copyright  2018 Eduardo Kraus  {@link http://videofront.com.br}
+ * @copyright  2019 Eduardo Kraus  {@link http://videofront.com.br}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,7 +26,6 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 
 $id = optional_param('id', 0, PARAM_INT);
-$n = optional_param('n', 0, PARAM_INT);
 
 if ($id) {
     $cm = get_coursemodule_from_id('videofront', $id, 0, false, MUST_EXIST);
@@ -41,30 +40,40 @@ if ($id) {
 }
 
 require_login($course, true, $cm);
+$config = get_config('videofront');
 
-$event = \mod_videofront\event\course_module_viewed::create(array(
-    'objectid' => $PAGE->cm->instance,
-    'context' => $PAGE->context,
-));
-$event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $videofront);
-$event->trigger();
-
-$PAGE->set_url('/mod/videofront/view.php', array('id' => $cm->id));
-$PAGE->requires->js('/mod/videofront/assets/util.js', true);
-$PAGE->set_title(format_string($videofront->name));
-$PAGE->set_heading(format_string($course->fullname));
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading($videofront->name);
-if ($videofront->intro) {
-    echo $OUTPUT->box(format_module_intro('videofront', $videofront, $cm->id), 'generalbox mod_introbox', 'videofrontintro');
+$safetyplayer = "";
+if ($config->safety) {
+    $safety = $config->safety;
+    if (strpos($safety, "profile") === 0) {
+        $safety = str_replace("profile_", "", $safety);
+        $safetyplayer = $USER->profile[$safety];
+    } else {
+        $safetyplayer = $USER->$safety;
+    }
 }
 
-echo '<div id="videofront-workaround">';
-echo "<iframe id=\"videofront-player\" width=\"100%\" height=\"450\"
-              src=\"get-player.php?id={$id}&n={$n}\" frameborder=\"0\" allowfullscreen></iframe>";
-echo '</div>';
-
-
-echo $OUTPUT->footer();
+if (!defined('VIDEOFRONTVIDEO')) {
+    require_once(__DIR__ . '/classes/videofrontvideo.php');
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <style>
+        html, body{
+            padding : 0;
+            margin  : 0;
+        }
+    </style>
+</head>
+<body>
+<?php
+echo videofrontvideo::getplayer($id, $videofront->identifier, $safetyplayer);
+?>
+</body>
+</html>
+<?php
+die();

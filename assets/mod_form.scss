@@ -20,6 +20,44 @@
             }
         }
     }
+    .botoes{
+        a{
+            display: inline-flex;
+            line-height: 23px;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border-radius: 4px;
+            background: #343848;
+            color: #fff;
+            margin-top: 5px;
+            &.videoteca{
+                margin-left: 30px;
+                border: 3px solid #00e3f9;
+                &:hover {
+                    border: 3px solid #269abc;
+                }
+            }
+            &.gravar{
+                margin-left: 10px;
+                border: 3px solid #008dff;
+                &:hover {
+                    border: 3px solid #0077d7;
+                }
+            }
+        }
+    }
     #vidrofront-search {
         margin: 0 0 12px 8px;
         padding: 8px 17px;

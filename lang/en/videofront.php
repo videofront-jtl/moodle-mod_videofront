@@ -24,15 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'VideoFront Video';
-$string['modulenameplural'] = 'VideoFront Video';
-$string['modulename_help'] = 'VideoFront is a plugin that simplifies and adds a lot of security in Moodle transactions with the Video Library';
-$string['videofront:addinstance'] = 'Add a new VideoFront';
-$string['videofront:submit'] = 'Submit VideoFront';
-$string['videofront:view'] = 'View VideoFront';
-$string['videofront'] = 'VideoFront';
-$string['pluginadministration'] = 'VideoFront administration';
-$string['pluginname'] = 'VideoFront';
+$string['modulename'] = 'Videoteca';
+$string['modulenameplural'] = 'Videoteca';
+$string['modulename_help'] = 'Videoteca is a plugin that simplifies and adds a lot of security in Moodle transactions with the Video Library';
+$string['videofront:addinstance'] = 'Add a new Videoteca';
+$string['videofront:submit'] = 'Submit Videoteca';
+$string['videofront:view'] = 'View Videoteca';
+$string['videofront'] = 'Videoteca';
+$string['pluginadministration'] = 'Videoteca administration';
+$string['pluginname'] = 'Videoteca';
 $string['privacy:metadata'] = 'The Videoteca if integrated with <a href="https://www.videofront.com.br/en/LiveSparrow">Live Sparrow</a> will save data for detection of piracy.';
 
 $string['loadind'] = 'Loading video list...';

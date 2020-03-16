@@ -19,7 +19,7 @@ require ( [ 'jquery' ], function ( $ ) {
     loadVideos ( 1, 0, true );
     selectVideo ( inputIdentifier.val (), $ ( "#id_name" ).val () );
 } );
- 
+
 /**
  * Load videos.
  *
@@ -98,17 +98,19 @@ function processListCourse ( videos ) {
 
                     if ( video.VIDEO_TIPO == "video" ) {
                         var videoIdentifier = video.VIDEO_IDENTIFIER.toUpperCase ();
-                        var html1           = '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
-                            '             onclick="selectVideo(\'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
-                            '    <span class="itens" >' +
-                            '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
-                            '        <span class="title">' + title + '</span>' +
-                            '    </span>' +
-                            '</div>';
+                        var html1           =
+                                '<div class="list-itens-grid" id="video_identifier_' + videoIdentifier + '" ' +
+                                '             onclick="selectVideo(\'' + videoIdentifier + '\', \'' + video.VIDEO_TITULO + '\')" >' +
+                                '    <span class="itens" >' +
+                                '        <img src="' + linkThumb + '" height="133" width="236"><br>' +
+                                '        <span class="title">' + title + '</span>' +
+                                '    </span>' +
+                                '</div>';
                         elements.append ( html1 );
                     } else {
                         var folderId = video.ITEM_ID.replace ( "p", "" );
-                        var html2    = '<div class="list-itens-grid">' +
+                        var html2    =
+                                '<div class="list-itens-grid">' +
                             '    <span class="itens"  onclick="loadVideos(1, ' + folderId + ', false)">' +
                             '        <img src="' + foldervideo + '" height="133" width="236"><br>' +
                             '        <span class="title">' + video.VIDEO_TITULO + '</span>' +

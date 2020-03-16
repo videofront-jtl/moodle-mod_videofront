@@ -70,8 +70,13 @@ class mod_videofront_mod_form extends moodleform_mod {
             $urlimagem = $PAGE->theme->pix_url('icones/loading-bars', 'videofront');
         }
 
-        $html = '<div id="vidrofront-load">' .
+        $html =
+            '<div id="vidrofront-load">' .
             '    <ul id="vidrofront-breadcrumb" ><li onclick="loadVideos(1,0, false)">Pasta Raiz</li></ul>' .
+            '    <div class="botoes">'.
+            '        <a href="../mod/videofront/open-videoteca.php" target="_blank" class="videoteca">Enviar novo Arquivo</a> '.
+            '        <a href="../mod/videofront/open-kapture.php"   target="_blank" class="gravar"   >Gravar um vídeo com Kapture</a>'.
+            '    </div>'.
             '    <div id="vidrofront-search" >' .
             '         <input type="text" id="vidrofront-title-search" placeholder="Buscar vídeos">' .
             '    </div>' .
