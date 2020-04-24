@@ -1,5 +1,13 @@
 # Plugin mod VideoFront
 
+## Moodle.org
+
+* https://moodle.org/plugins/repository_videofront
+* https://moodle.org/plugins/media_videofront
+* https://moodle.org/plugins/mod_videofront
+
+## Detalhes
+
 [![Build Status](https://travis-ci.org/videofront/moodle-mod_videofront.svg?branch=master)](https://travis-ci.org/videofront/moodle-mod_videofront)
 
 A Videoteca é uma solução de CMS (Content Management System) para publicação e organização de vídeos de forma segura. Possui recursos avançados para armazenamento, controle e entrega de conteúdo audiovisual.
