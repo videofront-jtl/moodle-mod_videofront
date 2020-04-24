@@ -116,16 +116,33 @@ class videofrontvideo {
     }
 
     /**
+     * Call for get status.
+     *
+     * @param string $identifier
+     *
+     * @return string
+     */
+    public static function getstatus($identifier) {
+        $post = array(
+            "identifier" => $identifier
+        );
+
+        $baseurl = "api/v1/video/status/";
+        return json_decode(self::load($baseurl, $post));
+    }
+
+    /**
      * get Kapture link
      *
      * @return string
      */
-    public static function getkapturelink() {
+    public static function getkapturelink($identifier = '') {
         global $USER;
 
         $post = [
             'email' => $USER->email,
-            'nome' => fullname($USER)
+            'nome' => fullname($USER),
+            'identifier' => $identifier
         ];
 
         $baseurl = "api/kapture/getlink/";

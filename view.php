@@ -61,10 +61,10 @@ if ($videofront->intro) {
     echo $OUTPUT->box(format_module_intro('videofront', $videofront, $cm->id), 'generalbox mod_introbox', 'videofrontintro');
 }
 
-echo '<div id="videofront-workaround">';
-echo "<iframe id=\"videofront-player\" width=\"100%\" height=\"450\"
-              src=\"get-player.php?id={$id}&n={$n}\" frameborder=\"0\" allowfullscreen></iframe>";
-echo '</div>';
+if (!defined('VIDEOFRONTVIDEO')) {
+    require_once(__DIR__ . '/classes/videofrontvideo.php');
+}
+echo videofrontvideo::getplayer($id, $videofront->identifier, $safetyplayer);
 
 
 echo $OUTPUT->footer();
