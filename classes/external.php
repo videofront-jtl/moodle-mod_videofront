@@ -41,7 +41,7 @@ class mod_videofront_external extends external_api {
         return new \external_function_parameters(
             array(
                 'page' => new \external_value(PARAM_INT, 'Instance page of guest enrolment plugin.', VALUE_OPTIONAL),
-                'pasta' => new \external_value(PARAM_INT, 'Instance pasta of guest enrolment plugin.', VALUE_OPTIONAL),
+                'pastaid' => new \external_value(PARAM_INT, 'Instance pastaid of guest enrolment plugin.', VALUE_OPTIONAL),
                 'titulo' => new \external_value(PARAM_TEXT, 'Instance titulo of guest enrolment plugin.', VALUE_OPTIONAL)
             ));
     }
@@ -50,14 +50,16 @@ class mod_videofront_external extends external_api {
      * Listing videos.
      *
      * @param int $page
-     * @param int $pasta
+     * @param int $pastaid
      * @param string $titulo
      * @return array
+     * @throws dml_exception
+     * @throws invalid_parameter_exception
      */
-    public static function listing($page, $pasta, $titulo) {
+    public static function listing($page, $pastaid, $titulo) {
         $params = self::validate_parameters(self::listing_parameters(), [
             'page' => $page,
-            'pasta' => $pasta,
+            'pastaid' => $pastaid,
             'titulo' => $titulo
         ]);
 
