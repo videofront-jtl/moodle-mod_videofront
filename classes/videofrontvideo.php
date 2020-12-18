@@ -42,17 +42,16 @@ class videofrontvideo {
      * @param string $titulo
      *
      * @return array
-     * @throws dml_exception
      */
     public static function listing($page, $pasta, $titulo) {
         $post = array(
             "page" => $page,
-            "pastaid" => $pasta,
+            "pasta" => $pasta,
             "titulo" => $titulo
         );
 
-        $baseurl = "api/v2/video";
-        $json = self::load($baseurl, $post, "GET");
+        $baseurl = "api/videos/list/";
+        $json = self::load($baseurl, $post);
 
         return json_decode($json);
     }
@@ -65,7 +64,6 @@ class videofrontvideo {
      * @param string $safetyplayer
      *
      * @return string
-     * @throws dml_exception
      */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
         global $USER;
@@ -89,28 +87,21 @@ class videofrontvideo {
                         src='{$config->url}Embed/iframe/?token={$token}'></iframe>
             </div>
             <script>
-                window.addEventListener('message', receiveMessage, false);
-                function receiveMessage(event)
-                {
-                    if ( event.data.local !== 'vfplayer' ) {
-                        return;
+                window.onload = function() {
+                    var videoBoxWidth = 0;
+
+                    var videoBox = document.getElementById('videoteca-background');
+                    if (videoBox.offsetWidth) {
+                        videoBoxWidth = videoBox.offsetWidth;
+                    } else if (videoBox.clientWidth) {
+                        videoBoxWidth = videoBox.clientWidth;
                     }
-                    if ( event.data.nomeMensagem !== 'start-player' ) {
-                        var videoBoxWidth = 0;
-                        var ratio = event.data.ratio.split(':');
-                        var videoBox = document.getElementById('videoteca-background');
-                        if (videoBox.offsetWidth) {
-                            videoBoxWidth = videoBox.offsetWidth;
-                        } else if (videoBox.clientWidth) {
-                            videoBoxWidth = videoBox.clientWidth;
-                        }
-    
-                        var videohd1 = document.getElementById('videoteca-video');
-                        var videoBoxHeight2   = videoBoxWidth * ratio[1] / ratio[0];
-                        videohd1.style.width  = videoBoxWidth + 'px';
-                        videohd1.style.height = videoBoxHeight2 + 'px';
-                    }
-                }
+
+                    var videohd1 = document.getElementById('videoteca-video');
+                    var videoBoxHeight2   = videoBoxWidth * 9 / 16;
+                    videohd1.style.width  = videoBoxWidth + 'px';
+                    videohd1.style.height = videoBoxHeight2 + 'px';
+                };
             </script>";
 
         //$post = array(
@@ -130,19 +121,20 @@ class videofrontvideo {
      * @param string $identifier
      *
      * @return string
-     * @throws dml_exception
      */
     public static function getstatus($identifier) {
-        $baseurl = "api/v2/video/{$identifier}/status/";
-        return json_decode(self::load($baseurl, null, "GET"));
+        $post = array(
+            "identifier" => $identifier
+        );
+
+        $baseurl = "api/v1/video/status/";
+        return json_decode(self::load($baseurl, $post));
     }
 
     /**
      * get Kapture link
      *
-     * @param string $identifier
      * @return string
-     * @throws dml_exception
      */
     public static function getkapturelink($identifier = '') {
         global $USER;
@@ -154,38 +146,28 @@ class videofrontvideo {
         ];
 
         $baseurl = "api/kapture/getlink/";
-        return self::load($baseurl, $post, "POST");
+        return self::load($baseurl, $post);
     }
 
     /**
      * Curl execution.
      *
      * @param string $baseurl
-     * @param array $query
+     * @param array $post
      *
-     * @param string $protocol
      * @return string
-     * @throws dml_exception
      */
-    private static function load($baseurl, $query = null, $protocol = "GET") {
+    private static function load($baseurl, $post) {
         $config = get_config('videofront');
 
         $ch = curl_init();
 
-        $query = http_build_query($query, '', '&');
+        curl_setopt($ch, CURLOPT_URL, $config->url . $baseurl);
 
-        if ($protocol == "POST") {
+        if ($post != null) {
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
-
-            $queryUrl = "";
-        } else if ($query) {
-            $queryUrl = "?{$query}";
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
         }
-
-        curl_setopt($ch, CURLOPT_URL, "{$config->url}{$baseurl}{$queryUrl}");
-
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $protocol);
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
