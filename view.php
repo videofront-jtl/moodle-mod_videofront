@@ -64,6 +64,9 @@ if ($videofront->intro) {
 if (!defined('VIDEOFRONTVIDEO')) {
     require_once(__DIR__ . '/classes/videofrontvideo.php');
 }
+
+$safetyplayer = "";
+
 echo videofrontvideo::getplayer($id, $videofront->identifier, $safetyplayer);
 
 
