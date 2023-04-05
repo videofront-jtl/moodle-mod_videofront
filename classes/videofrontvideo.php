@@ -84,7 +84,7 @@ class videofrontvideo {
 
         return "
             <div id='videoteca-background'>
-                <iframe width='100%' height='100%' frameborder='0'  
+                <iframe style='position: relative; width: 1920px; max-width: 100%; aspect-ratio: 1920/1080; border: none;'
                         id='videoteca-video' allowfullscreen
                         src='{$config->url}Embed/iframe/?token={$token}'></iframe>
             </div>
