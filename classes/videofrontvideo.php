@@ -47,7 +47,7 @@ class videofrontvideo {
     public static function listing($page, $pasta, $titulo) {
         $post = array(
             "page" => $page,
-            "pastaid" => $pasta,
+            // "pastaid" => $pasta,
             "titulo" => $titulo
         );
 
