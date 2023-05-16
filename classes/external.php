@@ -59,7 +59,7 @@ class mod_videofront_external extends external_api {
     public static function listing($page, $pastaid, $titulo) {
         $params = self::validate_parameters(self::listing_parameters(), [
             'page' => $page,
-            'pastaid' => $pastaid,
+            //'pastaid' => $pastaid,
             'titulo' => $titulo
         ]);
 
